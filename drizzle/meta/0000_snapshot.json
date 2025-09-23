@@ -1,0 +1,509 @@
+{
+  "id": "77e8f916-b629-490f-b639-5f6240b803cb",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.applicant": {
+      "name": "applicant",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dob": {
+          "name": "dob",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location": {
+          "name": "location",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "device": {
+          "name": "device",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "internet": {
+          "name": "internet",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "availability": {
+          "name": "availability",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "experience": {
+          "name": "experience",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "s3_url": {
+          "name": "s3_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "applicant_email_unique": {
+          "name": "applicant_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.background_check": {
+      "name": "background_check",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dob": {
+          "name": "dob",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ssn": {
+          "name": "ssn",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "employer": {
+          "name": "employer",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "job_title": {
+          "name": "job_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ref_1_name": {
+          "name": "ref_1_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ref_1_phone": {
+          "name": "ref_1_phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ref_1_email": {
+          "name": "ref_1_email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ref_2_name": {
+          "name": "ref_2_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ref_2_phone": {
+          "name": "ref_2_phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ref_2_email": {
+          "name": "ref_2_email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "criminal_record": {
+          "name": "criminal_record",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dl_front": {
+          "name": "dl_front",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dl_back": {
+          "name": "dl_back",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "applicant_id": {
+          "name": "applicant_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "background_check_applicant_id_applicant_id_fk": {
+          "name": "background_check_applicant_id_applicant_id_fk",
+          "tableFrom": "background_check",
+          "tableTo": "applicant",
+          "columnsFrom": [
+            "applicant_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "background_check_email_unique": {
+          "name": "background_check_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.idme": {
+      "name": "idme",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "other_names": {
+          "name": "other_names",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "state": {
+          "name": "state",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "zip_code": {
+          "name": "zip_code",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dob": {
+          "name": "dob",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ssn": {
+          "name": "ssn",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "idme_username": {
+          "name": "idme_username",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "idme_password": {
+          "name": "idme_password",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "father_first": {
+          "name": "father_first",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "father_last": {
+          "name": "father_last",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mother_first": {
+          "name": "mother_first",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mother_last": {
+          "name": "mother_last",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mothers_maiden": {
+          "name": "mothers_maiden",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "state_of_birth": {
+          "name": "state_of_birth",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city_of_birth": {
+          "name": "city_of_birth",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dl_front": {
+          "name": "dl_front",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dl_back": {
+          "name": "dl_back",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "w2_ssl": {
+          "name": "w2_ssl",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "applicant_id": {
+          "name": "applicant_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "idme_applicant_id_applicant_id_fk": {
+          "name": "idme_applicant_id_applicant_id_fk",
+          "tableFrom": "idme",
+          "tableTo": "applicant",
+          "columnsFrom": [
+            "applicant_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "idme_email_unique": {
+          "name": "idme_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
