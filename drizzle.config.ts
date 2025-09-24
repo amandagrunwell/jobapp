@@ -1,11 +1,11 @@
 import type { Config } from "drizzle-kit";
 
 export default {
-  schema: "./lib/db/schema.ts", // adjust path to your schema
-  out: "./drizzle", // where migrations go
-  dialect: "postgresql", // ✅ required
+  schema: "./lib/db/schema.ts", // your schema
+  out: "./drizzle", // migrations folder
+  dialect: "postgresql",
+  // Just give drizzle-kit a full connection URL
   dbCredentials: {
     url: process.env.DATABASE_URL || "",
-    ssl: { rejectUnauthorized: true, ca: process.env.RDS_CA_BUNDLE },
   },
 } satisfies Config;
