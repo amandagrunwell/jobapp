@@ -193,8 +193,8 @@ export default function Home() {
 
       if (resp.ok) {
         setMessage("Application submitted successfully — thank you!");
-        // setForm(initialFormState);
-        // router.push("/jobs/rmrp/application-success");
+        setForm(initialFormState);
+        router.push("/jobs/rmrp/application-success");
         setErrors({});
       } else if (resp.status === 409) {
         // Duplicate email (from backend’s err.code === "23505")
