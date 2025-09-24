@@ -16,7 +16,6 @@ import { applicant as applicantType } from "@/app/envStore/types";
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
-    console.log(formData);
 
     const dlFront = formData.get("dlBack") as File;
     const dlBack = formData.get("dlFront") as File;
