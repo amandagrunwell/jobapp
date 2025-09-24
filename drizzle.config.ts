@@ -5,6 +5,7 @@ export default {
   out: "./drizzle", // where migrations go
   dialect: "postgresql", // ✅ required
   dbCredentials: {
-    url: "postgres://postgres:1855@localhost:5432/job", // ✅ or use process.env.DATABASE_URL
+    url: process.env.DATABASE_URL || "",
+    ssl: { rejectUnauthorized: true, ca: process.env.RDS_CA_BUNDLE },
   },
 } satisfies Config;
