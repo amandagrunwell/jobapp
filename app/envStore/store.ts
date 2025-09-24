@@ -11,6 +11,7 @@ export const envStore: EnvStore = {
   SMTP_PASS: process.env.SMTP_PASS || "",
   SMTP_USER: process.env.SMTP_USER || "",
   ActiveDomain: process.env.ActiveDomain || "",
+  RESEND_API_KEY: process.env.RESEND_API_KEY || "",
 };
 
 const setEnvStoreFromEnvironment = () => {

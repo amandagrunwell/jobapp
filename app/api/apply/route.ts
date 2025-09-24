@@ -3,10 +3,10 @@ import { capitalizeName } from "@/app/util";
 import { createApplicant, updateApplicant } from "@/lib/db/applicantsRepo";
 import { applicant } from "@/lib/db/schema";
 import { acknowledgementEmail } from "@/lib/emails/applicationAcknowledgement";
-import { sendMail } from "@/lib/mailer/mail";
 import { uploadFile } from "@/lib/s3/uploadFile";
 import { NextResponse } from "next/server";
 import { uploadAFile } from "../idme/helper";
+import { sendMail } from "@/lib/mailer/resendMailer";
 
 export async function POST(request: Request) {
   try {

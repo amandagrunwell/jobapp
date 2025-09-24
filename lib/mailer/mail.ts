@@ -9,7 +9,7 @@ type AttachmentInput =
   | { filename: string; content: NodeJS.ReadableStream } // stream
   | { filename: string; content: string; encoding?: string }; // base64/text
 
-type SendMailOptions = {
+export type SendMailOptions = {
   to: string | string[];
   subject: string;
   html: string;

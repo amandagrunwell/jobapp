@@ -48,6 +48,7 @@ export interface EnvStore {
   SMTP_USER: string;
   SMTP_PASS: string;
   ActiveDomain: string;
+  RESEND_API_KEY: string;
 }
 
 // export interface CustomEnvStore extends EnvStore {
