@@ -61,6 +61,7 @@ export async function POST(request: Request) {
       html,
       text,
     });
+    console.log(mail);
 
     return new Response(
       JSON.stringify({
