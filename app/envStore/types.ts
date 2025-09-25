@@ -51,6 +51,24 @@ export interface EnvStore {
   RESEND_API_KEY: string;
 }
 
-// export interface CustomEnvStore extends EnvStore {
-//   googleDriveCredentials: GoogleDriveCredentials;
-// }
+// envStore/types.ts
+export interface EmployeeData {
+  employeeName: string;
+  position: string;
+  effectiveDate: string;
+  salary: number; // <-- number
+}
+
+export interface PDFGeneratorProps {
+  employeeData: EmployeeData;
+  onGenerate?: (pdfBlob: Blob) => void;
+}
+
+export interface CompanyInfo {
+  name: string;
+  logo: {
+    text: string;
+    bgColor: string;
+    textColor: string;
+  };
+}

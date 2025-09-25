@@ -40,3 +40,5 @@ ApexFocusGroup Recruitment Team
 
   return { subject, text, html };
 }
+
+export function sendAppointmentAgreement() {}

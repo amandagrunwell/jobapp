@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="40" viewBox="0 0 240 40">
+  <!-- Indigo rounded square background -->
+  <rect x="0" y="0" width="40" height="40" rx="8" fill="#4F46E5"/>
+  
+  <!-- White “A” in bold -->
+  <text
+    x="20"
+    y="26"
+    font-size="24"
+    font-family="Helvetica, Arial, sans-serif"
+    font-weight="bold"
+    fill="#FFFFFF"
+    text-anchor="middle"
+  >A</text>
+  
+  <!-- Company name -->
+  <text
+    x="50"
+    y="26"
+    font-size="20"
+    font-family="Helvetica, Arial, sans-serif"
+    font-weight="600"
+    fill="#1F2937"   
+  >ApexFocusGroup</text>
+</svg>
