@@ -21,7 +21,7 @@ export interface ConfirmationData {
 
 const ConfirmationLetterGenerator: React.FC = () => {
   const [confirmationData, setConfirmationData] = useState<ConfirmationData>({
-    employeeName: "Adrian Joseph Hansen",
+    employeeName: "",
     date: new Date().toISOString().split("T")[0],
     logoUrl: "/logo 1.png",
     position: "Data Entry Clerk",

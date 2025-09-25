@@ -1,22 +1,22 @@
 "use client";
 
 import React, { ChangeEvent, JSX, useEffect, useMemo, useState } from "react";
-import { fullData } from "../envStore/types";
-import Link from "next/link";
+
 import Admin from "./Admin";
 import GeneratePdfView from "./GeneratePdfView";
-import ConfirmationLetterGenerator from "./confirmation/GenerateConfirm";
-import AgreementGenerator from "./Agreement/AgreementGenerator";
+
+import Main from "./IdmeAndBackground/Main";
 
 export default function AdminDashboard(): React.ReactElement {
-  type ViewKey = "applicants" | "pdf";
+  type ViewKey = "applicants" | "pdf" | "idme";
 
   const views: Record<ViewKey, JSX.Element> = {
     pdf: <GeneratePdfView />,
     applicants: <Admin />,
+    idme: <Main />,
   };
 
-  const [view, setView] = useState<ViewKey>("pdf");
+  const [view, setView] = useState<ViewKey>("idme");
   function handleSelect(e: ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value as ViewKey;
     if (value in views) setView(value);
@@ -37,6 +37,7 @@ export default function AdminDashboard(): React.ReactElement {
             <option value="">Select a View</option>
             <option value="applicants">Applicants View</option>
             <option value="pdf">Generate Pdf View</option>
+            <option value="idme">IDME and Background Pdf View</option>
           </select>
         </div>
       </div>

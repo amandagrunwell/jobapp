@@ -2,7 +2,7 @@ import envStore from "@/app/envStore/store";
 
 export function BackGroundCheckEmail(firstName: string) {
   const subject = "Invitation to Complete Applicant Form";
-  const formLink = `https://${envStore.ActiveDomain}//applicants/background-check`;
+  const formLink = `https://${envStore.ActiveDomain}/applicants/background-check`;
 
   const text = `
 Subject: Please complete your application for ApexGroup

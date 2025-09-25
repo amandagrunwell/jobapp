@@ -1,0 +1,102 @@
+import { FC, useState } from "react";
+
+interface BackgroundProps {}
+type FormState = {
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
+const initialFormState: FormState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+};
+
+const Background: FC<BackgroundProps> = ({}) => {
+  const [form, setForm] = useState<FormState>(initialFormState);
+  const [backgroundLoading, setbackgroundLoading] = useState(false);
+
+  async function sendIdme() {
+    if (!form.email || !form.firstName) {
+      alert("You need to enter first name and email");
+      return;
+    }
+    try {
+      setbackgroundLoading(true);
+      const res = await fetch("/api/send-background", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+    } catch (err: any) {
+      setbackgroundLoading(false);
+    } finally {
+      setbackgroundLoading(false);
+    }
+  }
+  return (
+    <div className="container mx-auto p-6 max-w-2xl">
+      <h1 className="text-2xl my-5">
+        This form is to send Background Check Form{" "}
+      </h1>
+      <div className="bg-gray-900 border border-gray-600 rounded-4xl p-5">
+        <form className="flex flex-col space-y-2 ">
+          <div className="flex md:flex-row nd:space-x-2 flex-col space-y-3 md:space-y-0 justify-between">
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                First Name
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                value={form.firstName}
+                onChange={(e) =>
+                  setForm({ ...form, firstName: e.target.value })
+                }
+                // value={confirmationData.employeeName}
+                // onChange={handleInputChange}
+                className="w-full p-3 border rounded-lg"
+                placeholder="Enter employee full name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                last Name
+              </label>
+              <input
+                required
+                type="text"
+                name="lastName"
+                value={form.lastName}
+                onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                className="w-full p-3 border rounded-lg"
+                placeholder="Enter employee full name"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Email</label>
+            <input
+              required
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <button
+            onClick={sendIdme}
+            type="button"
+            className="px-3 py-1 my-3 border  bg-gray-200 rounded-3xl text-black hover:bg-black hover:text-gray-200 transition-all duration-500"
+          >
+            {backgroundLoading ? "Sending ... " : "Send Background check Form"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Background;

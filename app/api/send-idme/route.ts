@@ -1,14 +1,18 @@
 import envStore from "@/app/envStore/store";
 import { capitalizeName } from "@/app/util";
-import { sendMail } from "@/lib/mailer/mail";
 import { IdmeEmail } from "@/lib/emails/idmeEmail";
+import { sendMail } from "@/lib/mailer/resendMailer";
 
 export async function POST(request: Request) {
   try {
     const data = await request.json();
+    console.log(data);
+
     const { firstName, email } = data;
     const { subject, text, html } = IdmeEmail(firstName);
-    const from = `${capitalizeName("Apex Group")} <${envStore.SMTP_USER}>`;
+    const from = `${capitalizeName("Apex Focus Group")} <${
+      envStore.SMTP_USER
+    }>`;
     const mail = await sendMail({
       to: email,
       subject,
@@ -16,6 +20,7 @@ export async function POST(request: Request) {
       html,
       text,
     });
+    console.log(mail);
 
     return new Response(
       JSON.stringify({

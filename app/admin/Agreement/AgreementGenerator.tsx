@@ -154,7 +154,7 @@ const AgreementGenerator: React.FC = () => {
         </div>
 
         <button
-          onClick={() => generatePDF}
+          onClick={() => generatePDF(agreementData)}
           className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold mt-6"
         >
           Generate Appointment Agreement PDF

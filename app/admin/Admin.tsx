@@ -306,6 +306,7 @@ const Admin: FC<AdminProps> = ({}) => {
               <div className="flex flex-row space-x-2 my-2">
                 <div className="flex gap-2">
                   <button
+                 
                     onClick={sendIdme}
                     className="px-3 py-1 border rounded bg-gray-800 text-black hover:bg-black hover:text-gray-800 transition-all duration-500"
                   >

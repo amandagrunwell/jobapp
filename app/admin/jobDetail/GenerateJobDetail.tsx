@@ -28,7 +28,7 @@ const JobDetailsGenerator: React.FC = () => {
     paidTimeOff: "21",
     equipmentDetails: "Apple MacBook Pro or iMac",
     trainingDuration: "two weeks",
-    hrManagerName: "Devan Kunz",
+    hrManagerName: "Brian McDaniel",
   });
 
   const [logoFile, setLogoFile] = useState<File | null>(null);
