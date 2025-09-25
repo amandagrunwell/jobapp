@@ -1,13 +1,46 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { ChangeEvent, JSX, useEffect, useMemo, useState } from "react";
 import { fullData } from "../envStore/types";
 import Link from "next/link";
 import Admin from "./Admin";
 import GeneratePdfView from "./GeneratePdfView";
+import ConfirmationLetterGenerator from "./confirmation/GenerateConfirm";
+import AgreementGenerator from "./Agreement/AgreementGenerator";
 
 export default function AdminDashboard(): React.ReactElement {
-  const views = { generatePdf: <GeneratePdfView />, table: <Admin /> };
+  type ViewKey = "applicants" | "pdf";
 
-  return views.generatePdf;
+  const views: Record<ViewKey, JSX.Element> = {
+    pdf: <GeneratePdfView />,
+    applicants: <Admin />,
+  };
+
+  const [view, setView] = useState<ViewKey>("pdf");
+  function handleSelect(e: ChangeEvent<HTMLSelectElement>) {
+    const value = e.target.value as ViewKey;
+    if (value in views) setView(value);
+    else setView("pdf"); // fallback for unknown value
+  }
+  return (
+    <>
+      <div className="max-w-8xl p-5 bg-gray-900">
+        <div className="p-2 border-gray-200 flex flex-col space-y-2 my-5">
+          <label htmlFor="generate" className="text-xl">
+            Select View
+          </label>
+          <select
+            id="generate"
+            onChange={handleSelect}
+            className="border rounded-4xl p-2 bg-gray-900 text-xl"
+          >
+            <option value="">Select a View</option>
+            <option value="applicants">Applicants View</option>
+            <option value="pdf">Generate Pdf View</option>
+          </select>
+        </div>
+      </div>
+      {views[view]}
+    </>
+  );
 }
