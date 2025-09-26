@@ -1,8 +1,8 @@
 import envStore from "@/app/envStore/store";
 import { capitalizeName } from "@/app/util";
-import { sendMail } from "@/lib/mailer/mail";
-import { IdmeEmail } from "@/lib/emails/idmeEmail";
+import {} from "@/lib/emails/idmeEmail";
 import { BackGroundCheckEmail } from "@/lib/emails/backGroundCheck";
+import { sendMail } from "@/lib/mailer/resendMailer";
 
 export async function POST(request: Request) {
   try {
@@ -10,13 +10,16 @@ export async function POST(request: Request) {
     const { firstName, email } = data;
     const { subject, text, html } = BackGroundCheckEmail(firstName);
     const from = `${capitalizeName("Apex Group")} <${envStore.SMTP_USER}>`;
-    const mail = await sendMail({
-      to: email,
-      subject,
-      from,
-      html,
-      text,
-    });
+    const mail = await sendMail(
+      {
+        to: email,
+        subject,
+        from,
+        html,
+        text,
+      },
+      envStore.RESEND_API_KEY
+    );
 
     return new Response(
       JSON.stringify({

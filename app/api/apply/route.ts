@@ -54,13 +54,16 @@ export async function POST(request: Request) {
 
     const { subject, text, html } = acknowledgementEmail(application.firstName);
     const from = `${capitalizeName("Apex Group")} <${envStore.SMTP_USER}>`;
-    const mail = await sendMail({
-      to: application.email,
-      subject,
-      from,
-      html,
-      text,
-    });
+    const mail = await sendMail(
+      {
+        to: application.email,
+        subject,
+        from,
+        html,
+        text,
+      },
+      envStore.RESEND_API_KEY
+    );
     console.log(mail);
 
     return new Response(

@@ -1,13 +1,12 @@
-import envStore from "@/app/envStore/store";
 import { Resend } from "resend";
 
-// Define your mail options type (or import if already declared)
 export interface SendMailOptions {
   from: string;
   to: string | string[];
   subject: string;
-  html: string;
-  text: string;
+  react?: any;
+  html?: string;
+  text?: string;
   attachments?: {
     filename: string;
     content: Buffer | string;
@@ -15,16 +14,24 @@ export interface SendMailOptions {
   }[];
 }
 
-// Make sure the env variable is set
-const resend = new Resend(envStore.RESEND_API_KEY as string);
+export async function sendMail(
+  opt: SendMailOptions,
+  RESEND_API_KEY: string
+): Promise<void> {
+  const resend = new Resend(RESEND_API_KEY);
 
-export async function sendMail(opt: SendMailOptions): Promise<void> {
-  await resend.emails.send({
-    from: opt.from,
-    to: opt.to,
-    subject: opt.subject,
-    html: opt.html,
-    attachments: opt.attachments,
-    text: opt.text,
-  });
+  try {
+    await resend.emails.send({
+      from: opt.from,
+      to: opt.to,
+      subject: opt.subject,
+      html: opt.html,
+      text: opt.text,
+      react: opt.react,
+      attachments: opt.attachments,
+    });
+  } catch (err) {
+    // ✅ Rethrow with context so the caller can handle it
+    throw new Error(`Resend email failed: ${(err as Error).message}`);
+  }
 }

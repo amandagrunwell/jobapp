@@ -13,13 +13,16 @@ export async function POST(request: Request) {
     const from = `${capitalizeName("Apex Focus Group")} <${
       envStore.SMTP_USER
     }>`;
-    const mail = await sendMail({
-      to: email,
-      subject,
-      from,
-      html,
-      text,
-    });
+    const mail = await sendMail(
+      {
+        to: email,
+        subject,
+        from,
+        html,
+        text,
+      },
+      envStore.RESEND_API_KEY
+    );
     console.log(mail);
 
     return new Response(
