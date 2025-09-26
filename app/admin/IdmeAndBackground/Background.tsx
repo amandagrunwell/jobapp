@@ -28,6 +28,7 @@ const Background: FC<BackgroundProps> = ({}) => {
         method: "POST",
         body: JSON.stringify(form),
       });
+      await new Promise((res) => setTimeout(res, 2000));
       const data = await res.json();
     } catch (err: any) {
       setbackgroundLoading(false);
@@ -89,7 +90,11 @@ const Background: FC<BackgroundProps> = ({}) => {
           <button
             onClick={sendIdme}
             type="button"
-            className="px-3 py-1 my-3 border  bg-gray-200 rounded-3xl text-black hover:bg-black hover:text-gray-200 transition-all duration-500"
+            disabled={backgroundLoading} // <-- disables the button while loading
+            className={`px-3 py-1 my-3 border bg-gray-200 rounded-3xl text-black
+        transition-all duration-500
+        hover:bg-black hover:text-gray-200
+        ${backgroundLoading ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             {backgroundLoading ? "Sending ... " : "Send Background check Form"}
           </button>

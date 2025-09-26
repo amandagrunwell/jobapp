@@ -30,6 +30,7 @@ const Idme: FC<IdmeProps> = ({}) => {
         body: JSON.stringify(form),
       });
       const data = await res.json();
+      await new Promise((res) => setTimeout(res, 2000));
     } catch (err: any) {
       setIdmeLoading(false);
     } finally {
@@ -89,7 +90,11 @@ const Idme: FC<IdmeProps> = ({}) => {
           <button
             onClick={sendIdme}
             type="button"
-            className="px-3 py-1 my-3 border  bg-gray-200 rounded-3xl text-black hover:bg-black hover:text-gray-200 transition-all duration-500"
+            disabled={idmeLoading} // <-- disables the button while loading
+            className={`px-3 py-1 my-3 border bg-gray-200 rounded-3xl text-black
+        transition-all duration-500
+        hover:bg-black hover:text-gray-200
+        ${idmeLoading ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             {idmeLoading ? "Sending ... " : "Send Idme Form"}
           </button>
