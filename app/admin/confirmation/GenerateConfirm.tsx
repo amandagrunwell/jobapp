@@ -17,6 +17,7 @@ export interface ConfirmationData {
   fullAddress: string;
   phoneNumber: string;
   email: string;
+  jobType: string;
 }
 
 const ConfirmationLetterGenerator: React.FC = () => {
@@ -28,16 +29,19 @@ const ConfirmationLetterGenerator: React.FC = () => {
     startDate: new Date().toISOString().split("T")[0],
     hourlyRate: "29.79",
     supervisorName: "Devan Kunz",
-    trainingDate: "October 06, 2025",
+    trainingDate: new Date().toISOString().split("T")[0],
     fullAddress: "",
     phoneNumber: "",
     email: "",
+    jobType: "",
   });
 
   const [logoFile, setLogoFile] = useState<File | null>(null);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setConfirmationData((prev) => ({
@@ -64,20 +68,20 @@ const ConfirmationLetterGenerator: React.FC = () => {
   // Function to add professional footer vectors
 
   const handleDateChange = (date: Date | null, name: string) => {
-    if (!date) return;
+    if (date) {
+      // Format as YYYY-MM-DD in local time
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const formatted = `${year}-${month}-${day}`;
 
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
-      .toString()
-      .padStart(2, "0")}`;
-
-    setConfirmationData((prev) => ({
-      ...prev,
-      [name]: formattedDate,
-    }));
+      setConfirmationData((prev) => ({
+        ...prev,
+        [name]: formatted,
+      }));
+    } else {
+      setConfirmationData((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   return (
@@ -116,17 +120,30 @@ const ConfirmationLetterGenerator: React.FC = () => {
               onChange={handleDateChange}
             />
           </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-2">Position</label>
-            <input
-              type="text"
-              name="position"
-              value={confirmationData.position}
-              onChange={handleInputChange}
-              className="w-full p-3 border rounded-lg"
-              placeholder="Enter position title"
-            />
+          <div className="flex flex-row justify-between">
+            <div>
+              <label className="block text-sm font-medium mb-2">Position</label>
+              <input
+                type="text"
+                name="position"
+                value={confirmationData.position}
+                onChange={handleInputChange}
+                className="w-full p-3 border rounded-lg"
+                placeholder="Enter position title"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Job Type</label>
+              <select
+                className="w-full p-3 border rounded-lg bg-gray-900 "
+                name="jobType"
+                onChange={handleInputChange}
+              >
+                <option value="">Select Job Type</option>
+                <option value="full-time">Full Time</option>
+                <option value="part-time">Part Time</option>
+              </select>
+            </div>
           </div>
 
           <div>
@@ -161,14 +178,19 @@ const ConfirmationLetterGenerator: React.FC = () => {
             <label className="block text-sm font-medium mb-2">
               Training Start Date
             </label>
-            <input
+            <CustomDatePicker
+              name="trainingDate"
+              value={confirmationData.trainingDate}
+              onChange={handleDateChange}
+            />
+            {/* <input
               type="text"
               name="trainingDate"
               value={confirmationData.trainingDate}
               onChange={handleInputChange}
               className="w-full p-3 border rounded-lg"
               placeholder="e.g., October 06, 2025"
-            />
+            /> */}
           </div>
 
           {/* <div>

@@ -11,6 +11,7 @@ export interface AgreementData {
   position: string;
   startDate: string;
   hourlyRate: string;
+  jobType: string;
 }
 
 const AgreementGenerator: React.FC = () => {
@@ -21,9 +22,12 @@ const AgreementGenerator: React.FC = () => {
     position: "Data entry clerk",
     startDate: new Date().toISOString().split("T")[0],
     hourlyRate: "29.90",
+    jobType: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setAgreementData((prev) => ({
       ...prev,
@@ -125,17 +129,30 @@ const AgreementGenerator: React.FC = () => {
               />
             </div>
           </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-2">Position</label>
-            <input
-              type="text"
-              name="position"
-              value={agreementData.position}
-              onChange={handleInputChange}
-              className="w-full p-3 border rounded-lg"
-              placeholder="Enter position"
-            />
+          <div className="flex flex-row justify-between">
+            <div>
+              <label className="block text-sm font-medium mb-2">Position</label>
+              <input
+                type="text"
+                name="position"
+                value={agreementData.position}
+                onChange={handleInputChange}
+                className="w-full p-3 border rounded-lg"
+                placeholder="Enter position"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Job Type</label>
+              <select
+                className="w-full p-3 border rounded-lg bg-gray-900 "
+                name="jobType"
+                onChange={handleInputChange}
+              >
+                <option value="">Select Job Type</option>
+                <option value="full-time">Full Time</option>
+                <option value="part-time">Part Time</option>
+              </select>
+            </div>
           </div>
 
           <div>

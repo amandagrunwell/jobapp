@@ -224,7 +224,9 @@ export const generatePDF = (agreementData: AgreementData) => {
     "3. WORKING HOURS",
     [
       "Your working hours will be as follows:",
-      "- Part-time, Monday to Friday, between 9:00 AM and 10:00 PM flexible hours",
+      `- ${
+        agreementData.jobType === "part-time" ? "Part-time" : "Full-Time"
+      }, Monday to Friday, between 9:00 AM and 10:00 PM flexible hours`,
       "- Break time: Pending on morning, afternoon or evening session",
       "",
       "You will be informed if you are required to work extra or irregular hours and will have the option to accept or decline. Appropriate time off will be considered for work performed outside normal operational hours.",

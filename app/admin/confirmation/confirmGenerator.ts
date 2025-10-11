@@ -247,7 +247,11 @@ export const generatePDF = (confirmationData: ConfirmationData) => {
   yPosition += 10;
 
   // Position details (left aligned)
-  const positionText = `This is a remote Full-time position, Monday to Friday, 9 AM to 5 PM, requiring at least 40 hours per week. You will be reporting to your supervisor, ${confirmationData.supervisorName}, via Zoom. All work will be conducted remotely.`;
+  const positionText = `This is a remote ${
+    confirmationData.jobType === "full-time" ? "Full-time" : "Part-time"
+  } position, Monday to Friday, 9 AM to 5 PM, requiring at least 40 hours per week. You will be reporting to your supervisor, ${
+    confirmationData.supervisorName
+  }, via Zoom. All work will be conducted remotely.`;
   const positionLines = pdf.splitTextToSize(positionText, contentWidth);
   positionLines.forEach((line: string) => {
     pdf.text(line, margin, yPosition);

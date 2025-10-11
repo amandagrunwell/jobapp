@@ -2,6 +2,7 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 
 interface CustomDatePickerProps {
   name: string;
@@ -18,7 +19,12 @@ const CustomDatePicker = ({
 }: CustomDatePickerProps) => {
   // Convert the string value to Date object - handle invalid dates
   const selectedDate =
-    value && !isNaN(new Date(value).getTime()) ? new Date(value) : new Date();
+    value && !isNaN(new Date(value).getTime())
+      ? new Date(
+          new Date(value).getTime() +
+            new Date(value).getTimezoneOffset() * 60000
+        )
+      : null;
 
   const years = Array.from(
     { length: new Date().getFullYear() + 100 - 1900 + 1 },
@@ -41,7 +47,17 @@ const CustomDatePicker = ({
   ];
 
   const handleDateChange = (date: Date | null) => {
-    onChange(date, name);
+    if (date) {
+      // store local date only
+      const localDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+      );
+      onChange(localDate, name);
+    } else {
+      onChange(null, name);
+    }
   };
 
   return (
