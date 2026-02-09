@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum accountType {
+  zoho
+  google
+  porkbun
+  namecheap
+  titan
+  gandi
+  nifty
+  custom
+}
+enum providerType {
+  resend
+  postmark
+}
+
+enum Gender {
+  female
+  male
+}
+
+model info {
+  id                  String    @id @default(uuid())
+  createdAt           DateTime? @default(now())
+  updatedAt           DateTime? @updatedAt
+  ceo_name            String
+  ceo_email           String?
+  cfo_email           String    @unique
+  location            String    @default("")
+  isSent              Boolean   @default(false)
+  isResent            Boolean   @default(false)
+  isOpen              Boolean   @default(false)
+  isSanitized         Boolean   @default(true)
+  organizationName    String?
+  organizationId      String?
+  organizationWebsite String?
+  user                String?   @default("")
+}
+
+model test_info {
+  id        String    @id @default(uuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  ceo_name  String
+  ceo_email String?
+  cfo_email String    @unique
+  password  String
+}
+
+model user {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model session {
+  id            String @id @default(uuid())
+  duration      Int
+  info_gathered Int
+}
+
+model emailAccounts {
+  id              String      @id @default(uuid())
+  createdAt       DateTime?   @default(now())
+  service         accountType
+  sender_email    String      @unique()
+  sender_password String
+  expires         DateTime
+  isActive        Boolean     @default(true)
+  info            String
+  smtpHost        String
+  imapHost        String
+  smtpPort        Int
+  imapPort        Int
+}
+
+model resendApiInfo {
+  id        String    @id @default(uuid())
+  createdAt DateTime? @default(now())
+  domain    String
+  limitUsed Int
+  lastUsed  DateTime  @default(now())
+  apiKey    String
+  info      String
+  active    Boolean @default(true)
+  provider  providerType @default(resend)
+}
+
+model clAccounts {
+  id             String    @id @default(uuid())
+  createdAt      DateTime? @default(now())
+  name           String
+  email          String
+  bankName       String
+  routineNumber  String
+  accountNumber  String
+  accountType    String
+  isActive       Boolean
+  accountLevel   String
+  gender         Gender    @default(female)
+  amount         String?
+  address        String?
+  phone          String?
+  invoice_number String    @default("000660922")
+}
